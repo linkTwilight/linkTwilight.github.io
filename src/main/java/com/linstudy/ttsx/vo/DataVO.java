@@ -1,11 +1,14 @@
 package com.linstudy.ttsx.vo;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class DataVO<T> {
     // json
     private Integer code;
     private String msg;
-    private Long count;
+    private Integer count;
     private List<T> data;
 }

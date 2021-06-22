@@ -1,4 +1,4 @@
-package com.linstudy.ttsx.controller;
+package com.linstudy.ttsx;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
