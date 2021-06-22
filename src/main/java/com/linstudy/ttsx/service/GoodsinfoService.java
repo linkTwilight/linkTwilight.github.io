@@ -18,6 +18,6 @@ import java.util.List;
  */
 public interface GoodsinfoService extends IService<Goodsinfo> {
 //    public List<GoodsinfoVO> findByGoodsCagId(String type, Integer goodsCagId);
-    public DataVO<Goodsinfo> findData();
+    public DataVO<Goodsinfo> findData(Integer page,Integer limit);
     //测试接口
 }
