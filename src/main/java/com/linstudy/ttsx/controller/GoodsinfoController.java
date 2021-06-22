@@ -6,12 +6,9 @@ import com.linstudy.ttsx.service.GoodsinfoService;
 import com.linstudy.ttsx.vo.DataVO;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -25,8 +22,8 @@ import java.util.ArrayList;
  * @author lin.twilight
  * @since 2021-06-21
  */
-//@Controller
 @RestController
+//@Controller
 //@RequestMapping("//goodsinfo")
 public class GoodsinfoController {
 
@@ -37,9 +34,16 @@ public class GoodsinfoController {
     private GoodsinfoService goodsinfoService;
 
     @GetMapping("/list")
-    public DataVO list(){
-        return goodsinfoService.findData();
+    @ResponseBody
+    public DataVO list(Integer page,Integer limit){
+        return goodsinfoService.findData(page, limit);
     }
+
+//    //移到本服务器
+//    @GetMapping("/{url}")
+//    public String redirect(@PathVariable("url") String url) {
+//        return url;
+//    }
 //    @GetMapping("/list/{type}/{id}")
 //    public ModelAndView list(
 //            @PathVariable("type") String type,

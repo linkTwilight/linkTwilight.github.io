@@ -1,6 +1,8 @@
 package com.linstudy.ttsx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.linstudy.ttsx.entity.Goodscategory;
 import com.linstudy.ttsx.entity.Goodsinfo;
 import com.linstudy.ttsx.Mapper.GoodsinfoMapper;
@@ -41,13 +43,21 @@ public class GoodsinfoServiceImpl extends ServiceImpl<GoodsinfoMapper, Goodsinfo
     //后台
 
     @Override
-    public DataVO<Goodsinfo> findData() {
+    public DataVO<Goodsinfo> findData(Integer page,Integer limit) {
         DataVO dataVO = new DataVO();
         dataVO.setCode(0);
         dataVO.setMsg("");
-        dataVO.setCount(goodsinfoMapper.selectCount(null));
+//        dataVO.setCount(goodsinfoMapper.selectCount(null));
 
-        List<Goodsinfo> goodsinfosList = goodsinfoMapper.selectList(null);
+        //分页
+        IPage<Goodsinfo> goodsinfoIPage = new Page<>(page,limit);
+        IPage<Goodsinfo> result = goodsinfoMapper.selectPage(goodsinfoIPage,null);
+
+        dataVO.setCount(result.getTotal());// 将count 类型 换成 long
+        List<Goodsinfo> goodsinfosList = result.getRecords();
+//        List<Goodsinfo> goodsinfosList = goodsinfoMapper.selectList(null);
+
+
         List<GoodsinfoVO> goodsinfoVOList = new ArrayList<>();
         for (Goodsinfo goodsinfo : goodsinfosList) {
             // 遍历列

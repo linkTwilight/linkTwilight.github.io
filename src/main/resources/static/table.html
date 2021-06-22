@@ -3,22 +3,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+	<link rel="stylesheet" href="layui/css/layui.css" media="all">
+	<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-  </div>
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+		<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+		<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+	</div>
 </script>
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="img">
+	<!-- 这里的 checked 的状态只是演示 -->
+	<img src="goods/{{d.goodsImg}}.jpg">
+
 </script>
 
 
@@ -26,49 +32,61 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 
 <script>
-  layui.use('table', function(){
-    var table = layui.table;
+    layui.use('table', function () {
+        var table = layui.table;
 
-    //温馨提示：默认由前端自动合计当前行数据。从 layui 2.5.6 开始： 若接口直接返回了合计行数据，则优先读取接口合计行数据。
-    //详见：https://www.layui.com/doc/modules/table.html#totalRow
-    table.render({
-      elem: '#test'
-      ,url:'http://localhost:8080/list'
-      ,toolbar: '#toolbarDemo'
-      ,title: '用户数据表'
-      ,totalRow: true
-      ,cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-        ,{field:'goodsName', title:'商品名', width:340, edit: 'text'}
-        ,{field:'goodsUnit', title:'单位', width:150, edit: 'text'}
-        ,{field:'goodsPrice', title:'价格', width:80, sort: true, totalRow: true}
-        ,{field:'goodsDesc', title:'描述', width:300, edit: 'text', sort: true}
-        ,{field:'goodsImg', title:'图片', width:100, edit: 'text'}
-        ,{field:'goodsCag', title:'分类',edit: 'text'}
-            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-      ]]
-      ,page: true
-    });
+        //温馨提示：默认由前端自动合计当前行数据。从 layui 2.5.6 开始： 若接口直接返回了合计行数据，则优先读取接口合计行数据。
+        //详见：https://www.layui.com/doc/modules/table.html#totalRow
+        table.render({
+            elem: '#test'
+            , url: 'http://localhost:8080/list'
+            // , url: '/list'
+            , toolbar: '#toolbarDemo'
+            , title: '用户数据表'
+            , totalRow: true
+            , cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    , {
+                    field: 'id',
+                    title: 'ID',
+                    width: 80,
+                    fixed: 'left',
+                    unresize: true,
+                    sort: true,
+                    totalRowText: '合计'
+                }
+                    , {field: 'goodsName', title: '商品名', width: 345, edit: 'text'}
+                    , {field: 'goodsUnit', title: '单位', width: 80, edit: 'text'}
+                    , {field: 'goodsPrice', title: '价格', width: 80, sort: true, totalRow: true}
+                    , {field: 'goodsDesc', title: '描述', width: 300, edit: 'text', sort: true}
+                    , {field: 'goodsImg', title: '图片', width: 120, edit: 'text', templet: '#img'}
+                    , {field: 'goodsCag', title: '分类', edit: 'text'}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+                ]
+			]
+            , page: true
+        });
 
-    //工具栏事件
-    table.on('toolbar(test)', function(obj){
-      var checkStatus = table.checkStatus(obj.config.id);
-      switch(obj.event){
-        case 'getCheckData':
-          var data = checkStatus.data;
-          layer.alert(JSON.stringify(data));
-          break;
-        case 'getCheckLength':
-          var data = checkStatus.data;
-          layer.msg('选中了：'+ data.length + ' 个');
-          break;
-        case 'isAll':
-          layer.msg(checkStatus.isAll ? '全选': '未全选')
-          break;
-      };
+        //工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                    break;
+            }
+            ;
+        });
     });
-  });
 </script>
 </body>
 </html>

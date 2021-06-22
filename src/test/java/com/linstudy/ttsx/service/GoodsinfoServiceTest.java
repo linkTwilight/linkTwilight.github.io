@@ -15,7 +15,7 @@ class GoodsinfoServiceTest {
 
     @Test
     void findData() {
-        DataVO dataVO = service.findData();
+//        DataVO dataVO = service.findData();
         int i = 2;
 
         // 测试完成 开放 controller接口   用debug测试

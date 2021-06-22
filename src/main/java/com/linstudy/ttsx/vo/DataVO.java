@@ -9,6 +9,7 @@ public class DataVO<T> {
     // json
     private Integer code;
     private String msg;
-    private Integer count;
+//    private Integer count;
+    private long count;
     private List<T> data;
 }
