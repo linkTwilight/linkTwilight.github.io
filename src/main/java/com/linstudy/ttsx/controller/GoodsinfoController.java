@@ -22,8 +22,8 @@ import java.util.ArrayList;
  * @author lin.twilight
  * @since 2021-06-21
  */
-@RestController
-//@Controller
+//@RestController
+@Controller
 //@RequestMapping("//goodsinfo")
 public class GoodsinfoController {
 
@@ -39,7 +39,7 @@ public class GoodsinfoController {
         return goodsinfoService.findData(page, limit);
     }
 
-//    //移到本服务器
+//    //移到本服务器  redirectHandel
 //    @GetMapping("/{url}")
 //    public String redirect(@PathVariable("url") String url) {
 //        return url;
