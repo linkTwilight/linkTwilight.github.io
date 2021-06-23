@@ -1,9 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>天天生鲜-购物车</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<th:block th:include="common.html :: source"></th:block>
+<!--	<link rel="stylesheet" type="text/css" href="css/reset.css">-->
+<!--	<link rel="stylesheet" type="text/css" href="css/main.css">-->
 </head>
 <body>
 	<div class="search_bar clearfix">
@@ -62,20 +64,21 @@
 		<li class="col04"><a href="/cart/place_order/">去结算</a></li>
 	</ul>
 
-	<div class="footer">
-		<div class="foot_link">
-			<a href="#">关于我们</a>
-			<span>|</span>
-			<a href="#">联系我们</a>
-			<span>|</span>
-			<a href="#">招聘人才</a>
-			<span>|</span>
-			<a href="#">友情链接</a>		
-		</div>
-		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
-		<p>电话：010-****888    京ICP备*******8号</p>
-	</div>
-	
+	<th:block th:include="common.html :: footer"></th:block>
+<!--	<div class="footer">-->
+<!--		<div class="foot_link">-->
+<!--			<a href="#">关于我们</a>-->
+<!--			<span>|</span>-->
+<!--			<a href="#">联系我们</a>-->
+<!--			<span>|</span>-->
+<!--			<a href="#">招聘人才</a>-->
+<!--			<span>|</span>-->
+<!--			<a href="#">友情链接</a>		-->
+<!--		</div>-->
+<!--		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>-->
+<!--		<p>电话：010-****888    京ICP备*******8号</p>-->
+<!--	</div>-->
+<!--	-->
 
 </body>
 </html>
